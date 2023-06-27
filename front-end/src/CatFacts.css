@@ -1,0 +1,9 @@
+.cat-facts-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f1f1f1;
+  }
+  
+  .cat-fact-item {
+    margin-bottom: 10px;
+  }

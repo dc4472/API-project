@@ -6,16 +6,19 @@ import CatFacts from './CatFacts';
 
 const App=props=> {
 
-      <div className="App">
-      <Router>
-          <main className="App-main">
-              <Routes>
-                <Route path="/" element={<CatFacts />} />
+      return(
+        <div className="App">
+        <Router>
+            <main className="App-main">
+                <Routes>
+                  <Route path="/" element={<CatFacts />} />
 
-              </Routes>
-          </main>
-      </Router>
-    </div>
+                </Routes>
+            </main>
+        </Router>
+      </div>
+
+      )
 
 
 
