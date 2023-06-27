@@ -5,44 +5,39 @@ import './CatFacts.css'
 
 
 const CatFacts = () => {
+
   const [facts, setFacts] = useState([]);
-  const [currentFactIndex, setCurrentFactIndex] = useState(0)
-
-
-
 
   useEffect(() => {
-
-    const fetchFacts = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/api/cat-facts');
-        console.log(response.data)
-        setFacts(response.data);
-      } catch (error) {
-        console.log('This error happened:')
-        console.error(error);
-      }
-    };
-
-    fetchFacts();
+    fetchCatFacts();
   }, []);
 
-  const handleNextFact = () => {
-    setCurrentFactIndex((prevIndex) => (prevIndex + 1) % facts.length);
-  }
+  const fetchCatFacts = () => {
+    axios
+    .get('http://localhost:5000/api')
+    .then(response => {
+      const factsData = response.data.filter(fact => fact.status.sentCount > 0 && fact.status.verified === true);
+      setFacts(factsData);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  };
 
   return (
-    <div className='cat-facts-container'>
-
+    <div>
       <h1>Cat Facts</h1>
-      {facts.length > 0 && (
-        <div className='cat-facts-item'>
-          <p>{facts[currentFactIndex]}</p>
-          <button onClick={handleNextFact}>Next Fact</button>
-        </div>
-      )}
+      <button onClick={fetchCatFacts}>Get Random Facts</button>
+      <div className='cat-facts-container'>
+        {facts.map(fact => (
+          <div key={fact._id} className="cat-fact-item">
+           {fact.text}
+           </div>
+        ))}
+      </div>
     </div>
   );
+  
 };
 
 export default CatFacts;

@@ -5,5 +5,8 @@
   }
   
   .cat-fact-item {
+    background-color: #f3f3f3;
+    padding: 10px;
     margin-bottom: 10px;
+    border-radius: 5px;
   }
